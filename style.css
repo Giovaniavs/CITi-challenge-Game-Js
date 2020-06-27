@@ -1,18 +1,18 @@
 body{
-    background-image: url(https://www.tibiawiki.com.br/images/0/04/Senja_Village_11.png);
-    background-repeat: no-repeat;
-    background-size: cover;
     margin: 0;
     padding: 0;
-    width: 1440px;
-    height: 900px;
+}
+
+img.background {
+    height: -webkit-fill-available;
+    width: 100%;
 }
 
 .char {
-    margin: -60% -0% 0% -25%;
-    width: 150px;
-    height: 150px;
+    margin: -19% -0% 0% -4%;
     transform: scaleX(1) rotate(0);
+    width: 100%;
+    height: 100%;
 }
 
 .container{
@@ -22,35 +22,27 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
+    width: 10%;
+    height: 10%;
     border-radius: 100px;
 }
 
 .rotated_direita{
     transform: scaleX(-1) rotate(71deg);
-    width: 150px;
-    height: 150px;
-    margin: -30% -0% 0% -60%;
+    margin: -3% -0% 0% 2%;
 }
 
 .rotated_cima {
     transform: scaleX(-1) rotate(180deg);
-    width: 150px;
-    height: 150px;
-    margin: 10% -0% 0% -30%;
+    margin: 12% -0% 0% -13%;
 }
 
 .rotated_esquerda{
-    transform: scaleX(-1) rotate(270deg);
-    width: 150px;
-    height: 150px;
-    margin: -20% -0% 0% 5%;
+    transform: scaleX(1) rotate(43deg);
+    margin: -8% -0% 0% 5%;
 }
 
 .rotated_baixo{
     transform: scaleX(-1) rotate(0deg);
-    width: 150px;
-    height: 150px;
-    margin: -60% -0% 0% -25%;
+    margin: -20% -0% 0% -10%;
 }

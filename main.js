@@ -1,5 +1,5 @@
-
-const img = document.getElementsByTagName("img")[0]
+const background = document.getElementsByClassName("background")[0]
+const img = document.getElementsByClassName("char")[0]
 const movementVector = [screen.width / 2, screen.height / 2];
 acceleration = 3 
 framerate = 10
@@ -31,6 +31,8 @@ window.addEventListener('keydown', (event) => {
       case "d":
           img.classList.add("rotated_direita");
           break;
+      default:
+          img.classList.add("char");
   }
 
   if (!keys.includes(key)) keys.push(key);
@@ -52,24 +54,27 @@ setInterval(() => {
 
   const bola = document.getElementsByClassName("container")[0]
 
-   if (!((movementVector[0]/screen.width)*100 <= 11)){
-     movementVector[0] -= forceVector[1] * acceleration;
-     bola.style.left = `${movementVector[0]}px`;
-   }
-
-   if (!((movementVector[1]/screen.height)*100 <= 25)){
-     movementVector[1] -= forceVector[0] * acceleration;
-     bola.style.top = `${movementVector[1]}px`;
+  // Esquerda
+  const porcentagemX = (movementVector[0]/background.width)*100
+  const porcentagemY = (movementVector[1]/background.height)*100
+  if (!( porcentagemX <= 15)){
+    movementVector[0] -= forceVector[1] * acceleration;
+    bola.style.left = `${movementVector[0]}px`;
   }
 
-  if (!((movementVector[0]/screen.width)*100 >= 87)){
+  if (!(porcentagemY <= 20)){
+    movementVector[1] -= forceVector[0] * acceleration;
+    bola.style.top = `${movementVector[1]}px`;
+  }
+  // Direita
+  if (!(porcentagemX >= 85)){
     movementVector[0] += forceVector[3] * acceleration;
     bola.style.right = `${movementVector[0]}px`;
   }
 
-  if (!((movementVector[1]/screen.height)*100 >= 85)){
+  if (!(porcentagemY >= 80)){
     movementVector[1] += forceVector[2] * acceleration;
     bola.style.down = `${movementVector[1]}px`;
- }
+  }
 
 }, framerate);

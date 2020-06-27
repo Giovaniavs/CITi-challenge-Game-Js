@@ -1,38 +1,45 @@
 const background = document.getElementsByClassName("background")[0]
 const img = document.getElementsByClassName("char")[0]
 const movementVector = [screen.width / 2, screen.height / 2];
-acceleration = 3 
-framerate = 10
+acceleration = 1.5;
+framerate = 10;
+var audio = new Audio('./sound/sound_steps.mp3');
 
-const keys = [];
+const keys= [];
+
+const classes = ["rotated_cima", "rotated_esquerda", "rotated_baixo", "rotated_direita"];
 
 window.addEventListener('keydown', (event) => {
-    const { key } = event;
-    const classes = ["rotated_cima", "rotated_esquerda", "rotated_baixo", "rotated_direita"]
+  const { key } = event;
     classes.forEach(status_de_rotacao => {
       if (img.classList.contains(status_de_rotacao)){
         img.classList.remove(status_de_rotacao);
-    }
+      }
     });
 
     switch(key){
       case "w":
           img.classList.add("rotated_cima");
+          audio.play();
           break;
 
       case "a":
           img.classList.add("rotated_esquerda");
+          audio.play();
           break;
 
       case "s":
           img.classList.add("rotated_baixo");
+          audio.play();
           break;
 
       case "d":
           img.classList.add("rotated_direita");
+          audio.play();
           break;
       default:
           img.classList.add("char");
+          audio.play();
   }
 
   if (!keys.includes(key)) keys.push(key);
@@ -52,29 +59,52 @@ setInterval(() => {
 
   const forceVector = [+up, +left, +down, +right];
 
-  const bola = document.getElementsByClassName("container")[0]
+  const char = document.getElementsByClassName("container")[0]
 
-  // Esquerda
-  const porcentagemX = (movementVector[0]/background.width)*100
-  const porcentagemY = (movementVector[1]/background.height)*100
-  if (!( porcentagemX <= 15)){
+  const porcentagemX = (movementVector[0]/background.width)*100   //Tela total X
+  const porcentagemY = (movementVector[1]/background.height)*100 //Tela total Y
+  
+
+  if (!( porcentagemX >= 15)){
+    var audio = new Audio("./sound/sound_stop.mp3");
+    audio.play();
+  }
+  if(!(porcentagemY >= 20)){
+    var audio = new Audio("./sound/sound_stop.mp3");
+    audio.play();
+  }
+
+  if(!(porcentagemX <= 85)){
+    var audio = new Audio("./sound/sound_stop.mp3");
+    audio.play();
+  }
+
+  if(!(porcentagemY <= 80)){
+    var audio = new Audio("./sound/sound_stop.mp3");
+    audio.play();
+  }
+
+  if (!( porcentagemX <= 15)){  // Limite parede da esquera
     movementVector[0] -= forceVector[1] * acceleration;
-    bola.style.left = `${movementVector[0]}px`;
+    char.style.left = `${movementVector[0]}px`;
   }
 
-  if (!(porcentagemY <= 20)){
+  if (!(porcentagemY <= 20)){ // Limite parede cima
     movementVector[1] -= forceVector[0] * acceleration;
-    bola.style.top = `${movementVector[1]}px`;
-  }
-  // Direita
-  if (!(porcentagemX >= 85)){
-    movementVector[0] += forceVector[3] * acceleration;
-    bola.style.right = `${movementVector[0]}px`;
+    char.style.top = `${movementVector[1]}px`;
   }
 
-  if (!(porcentagemY >= 80)){
+  if (!(porcentagemX >= 85)){ //Limite parede direita
+    movementVector[0] += forceVector[3] * acceleration;
+    char.style.right = `${movementVector[0]}px`;
+
+  }
+
+  if (!(porcentagemY >= 80)){ //Limite parede baixo
     movementVector[1] += forceVector[2] * acceleration;
-    bola.style.down = `${movementVector[1]}px`;
+    char.style.down = `${movementVector[1]}px`;
   }
 
 }, framerate);
+
+;

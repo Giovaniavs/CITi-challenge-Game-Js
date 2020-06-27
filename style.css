@@ -1,9 +1,11 @@
 body{
-    background-color: white;
-    height: 100vh;
+    background-image: url(https://www.tibiawiki.com.br/images/0/04/Senja_Village_11.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 0;
     padding: 0;
-    
+    width: 1440px;
+    height: 900px;
 }
 
 .char {

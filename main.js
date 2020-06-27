@@ -50,15 +50,26 @@ setInterval(() => {
 
   const forceVector = [+up, +left, +down, +right];
 
-  movementVector[0] += forceVector[3] * acceleration;
-  movementVector[1] += forceVector[2] * acceleration;
-  movementVector[0] -= forceVector[1] * acceleration;
-  movementVector[1] -= forceVector[0] * acceleration;
-
   const bola = document.getElementsByClassName("container")[0]
-  bola.style.left = `${movementVector[0]}px`;
-  bola.style.top = `${movementVector[1]}px`;
+
+   if (!((movementVector[0]/screen.width)*100 <= 11)){
+     movementVector[0] -= forceVector[1] * acceleration;
+     bola.style.left = `${movementVector[0]}px`;
+   }
+
+   if (!((movementVector[1]/screen.height)*100 <= 25)){
+     movementVector[1] -= forceVector[0] * acceleration;
+     bola.style.top = `${movementVector[1]}px`;
+  }
+
+  if (!((movementVector[0]/screen.width)*100 >= 87)){
+    movementVector[0] += forceVector[3] * acceleration;
+    bola.style.right = `${movementVector[0]}px`;
+  }
+
+  if (!((movementVector[1]/screen.height)*100 >= 85)){
+    movementVector[1] += forceVector[2] * acceleration;
+    bola.style.down = `${movementVector[1]}px`;
+ }
+
 }, framerate);
-
-
-

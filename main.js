@@ -1,14 +1,37 @@
 
 const img = document.getElementsByTagName("img")[0]
 const movementVector = [screen.width / 2, screen.height / 2];
-acceleration = 4 
-framerate = 1
+acceleration = 3 
+framerate = 10
 
 const keys = [];
 
 window.addEventListener('keydown', (event) => {
     const { key } = event;
-    
+    const classes = ["rotated_cima", "rotated_esquerda", "rotated_baixo", "rotated_direita"]
+    classes.forEach(status_de_rotacao => {
+      if (img.classList.contains(status_de_rotacao)){
+        img.classList.remove(status_de_rotacao);
+    }
+    });
+
+    switch(key){
+      case "w":
+          img.classList.add("rotated_cima");
+          break;
+
+      case "a":
+          img.classList.add("rotated_esquerda");
+          break;
+
+      case "s":
+          img.classList.add("rotated_baixo");
+          break;
+
+      case "d":
+          img.classList.add("rotated_direita");
+          break;
+  }
 
   if (!keys.includes(key)) keys.push(key);
 });

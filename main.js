@@ -4,13 +4,15 @@ const movementVector = [screen.width / 2, screen.height / 2];
 acceleration = 1.5;
 framerate = 10;
 var audio = new Audio('./sound/sound_steps.mp3');
+var impacto = false; // flag para controlar o audio de impacto do personagem com a paredes
 
-const keys= [];
 
+const keys= []; 
 const classes = ["rotated_cima", "rotated_esquerda", "rotated_baixo", "rotated_direita"];
 
 window.addEventListener('keydown', (event) => {
   const { key } = event;
+  //VERIFICA O MOVIMENTO DO PERSONAGEM E ROTACIONA DE ACORDO COM A DIRECAO
     classes.forEach(status_de_rotacao => {
       if (img.classList.contains(status_de_rotacao)){
         img.classList.remove(status_de_rotacao);
@@ -38,8 +40,7 @@ window.addEventListener('keydown', (event) => {
           audio.play();
           break;
       default:
-          img.classList.add("char");
-          audio.play();
+          break;
   }
 
   if (!keys.includes(key)) keys.push(key);
@@ -50,7 +51,6 @@ window.addEventListener('keyup', (event) => {
 
   if (keys.includes(key)) keys.splice(keys.indexOf(key), 1);
 });
-
 setInterval(() => {
   const up = keys.includes('w');
   const left = keys.includes('a');
@@ -63,26 +63,18 @@ setInterval(() => {
 
   const porcentagemX = (movementVector[0]/background.width)*100   //Tela total X
   const porcentagemY = (movementVector[1]/background.height)*100 //Tela total Y
-  
 
-  if (!( porcentagemX >= 15)){
-    var audio = new Audio("./sound/sound_stop.mp3");
-    audio.play();
-  }
-  if(!(porcentagemY >= 20)){
-    var audio = new Audio("./sound/sound_stop.mp3");
-    audio.play();
-  }
-
-  if(!(porcentagemX <= 85)){
-    var audio = new Audio("./sound/sound_stop.mp3");
-    audio.play();
+  //Emite apenas um som do minecraft quando bate na parede
+  if (!( porcentagemX >= 15) || !(porcentagemY >= 20) || !(porcentagemX <= 85) || !(porcentagemY <= 80)){
+    if(!impacto) {
+      var audio = new Audio("./sound/sound_stop.mp3");
+      audio.play();
+      impacto = true
+    }
+  } else {
+    impacto = false
   }
 
-  if(!(porcentagemY <= 80)){
-    var audio = new Audio("./sound/sound_stop.mp3");
-    audio.play();
-  }
 
   if (!( porcentagemX <= 15)){  // Limite parede da esquera
     movementVector[0] -= forceVector[1] * acceleration;
@@ -106,5 +98,3 @@ setInterval(() => {
   }
 
 }, framerate);
-
-;

@@ -2,8 +2,9 @@
 
 ## 1. Objetivo
 
-- [x] Implementar o movimento de um elemento HTML/CSS
-- [x] Implementar uma colisão!
+- [X] Implementar o movimento de um elemento HTML/CSS.
+- [X] Implementar uma colisão!
+- [X] Fazer o jogo com PURO Javascript!
 
 ## 2. Demonstração da Movimentação!
 

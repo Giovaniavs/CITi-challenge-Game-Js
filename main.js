@@ -65,7 +65,7 @@ setInterval(() => {
   const porcentagemY = (movementVector[1]/background.height)*100 //Tela total Y
 
   //Emite apenas um quando bate na parede
-  if (!( porcentagemX >= 21) || !(porcentagemY >= 25) || !(porcentagemX <= 77) || !(porcentagemY <= 78)){
+  if (!( porcentagemX >= 21) || !(porcentagemY >= 26) || !(porcentagemX <= 77) || !(porcentagemY <= 78)){
     if(!impacto) {
       var audio = new Audio("./sound/sound_stop.mp3");
       audio.play();
@@ -87,7 +87,7 @@ setInterval(() => {
 
   }
 
-  if (!(porcentagemY <= 25)){ // Limite parede cima
+  if (!(porcentagemY <= 26)){ // Limite parede cima
     movementVector[1] -= forceVector[0] * acceleration;
     char.style.top = `${movementVector[1]}px`;
   }

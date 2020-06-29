@@ -64,8 +64,8 @@ setInterval(() => {
   const porcentagemX = (movementVector[0]/background.width)*100   //Tela total X
   const porcentagemY = (movementVector[1]/background.height)*100 //Tela total Y
 
-  //Emite apenas um som do minecraft quando bate na parede
-  if (!( porcentagemX >= 15) || !(porcentagemY >= 20) || !(porcentagemX <= 85) || !(porcentagemY <= 80)){
+  //Emite apenas um quando bate na parede
+  if (!( porcentagemX >= 21) || !(porcentagemY >= 25) || !(porcentagemX <= 77) || !(porcentagemY <= 78)){
     if(!impacto) {
       var audio = new Audio("./sound/sound_stop.mp3");
       audio.play();
@@ -76,23 +76,24 @@ setInterval(() => {
   }
 
 
-  if (!( porcentagemX <= 15)){  // Limite parede da esquera
+  if (!( porcentagemX <= 21)){  // Limite parede da esquerda
     movementVector[0] -= forceVector[1] * acceleration;
     char.style.left = `${movementVector[0]}px`;
   }
 
-  if (!(porcentagemY <= 20)){ // Limite parede cima
-    movementVector[1] -= forceVector[0] * acceleration;
-    char.style.top = `${movementVector[1]}px`;
-  }
-
-  if (!(porcentagemX >= 85)){ //Limite parede direita
+  if (!(porcentagemX >= 77)){ //Limite parede direita
     movementVector[0] += forceVector[3] * acceleration;
     char.style.right = `${movementVector[0]}px`;
 
   }
 
-  if (!(porcentagemY >= 80)){ //Limite parede baixo
+  if (!(porcentagemY <= 25)){ // Limite parede cima
+    movementVector[1] -= forceVector[0] * acceleration;
+    char.style.top = `${movementVector[1]}px`;
+  }
+
+
+  if (!(porcentagemY >= 78)){ //Limite parede baixo
     movementVector[1] += forceVector[2] * acceleration;
     char.style.down = `${movementVector[1]}px`;
   }
